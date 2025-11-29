@@ -21,10 +21,6 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   */
 
   // Skip deployment on Monad testnet - we only want to deploy NoLossPredictionPool contracts
-  if (hre.network.name === "monad_testnet") {
-    console.log("⏭️  Skipping YourContract deployment on Monad testnet");
-    return;
-  }
 
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;

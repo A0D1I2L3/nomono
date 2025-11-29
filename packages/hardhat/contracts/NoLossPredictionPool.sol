@@ -115,8 +115,11 @@ contract NoLossPredictionPool is Ownable {
         uint256 _simulatedYield
     ) external onlySponsor(_poolId) notSettled(_poolId) {
         Pool storage pool = pools[_poolId];
+        
+        // Ensure betting period is over (This check is explicitly needed here since bettingOpen is not used)
         require(block.timestamp >= pool.bettingEndTime, "Betting period is not over yet");
-        require(_winningOutcomeId > 0, "Winning outcome must be valid");
+        
+        require(_winningOutcomeId > 0 && _winningOutcomeId < 3, "Winning outcome must be 1 or 2");
 
         pool.isSettled = true;
         pool.winningOutcomeId = _winningOutcomeId;
@@ -133,47 +136,51 @@ contract NoLossPredictionPool is Ownable {
     }
 
     function claimFunds(uint256 _poolId) external isSettled(_poolId) {
-        Pool storage pool = pools[_poolId];
-        uint256 claimAmount = 0;
-
-        // Sponsor Claim
-        if (msg.sender == pool.sponsor) {
-            require(!pool.hasClaimed[msg.sender], "Sponsor has already claimed");
-
-            uint256 sponsorYieldCut = (pool.totalYield * SPONSOR_YIELD_CUT_PERCENT) / 100;
-            claimAmount = pool.sponsorDeposit + sponsorYieldCut;
-
-            pool.hasClaimed[msg.sender] = true;
-        } 
-        // Participant Claim
-        else if (pool.userBet[msg.sender] != 0) {
-            require(!pool.hasClaimed[msg.sender], "Participant has already claimed");
-
-            // Principal is always returned (NO LOSS)
-            claimAmount = TICKET_FEE;
-
-            // Add yield share for winners
-            if (pool.userBet[msg.sender] == pool.winningOutcomeId) {
-                uint256 remainingYield = pool.totalYield - ((pool.totalYield * SPONSOR_YIELD_CUT_PERCENT) / 100);
-                uint256 winningTickets = pool.outcomeTicketCount[pool.winningOutcomeId];
-                
-                if (winningTickets > 0) {
-                    uint256 yieldShare = remainingYield / winningTickets;
-                    claimAmount = claimAmount + yieldShare;
-                }
-            }
-
-            pool.hasClaimed[msg.sender] = true;
-        } else {
-            revert("Address is neither sponsor nor participant in this pool");
-        }
-
+    Pool storage pool = pools[_poolId];
+    uint256 claimAmount = 0;
+    
+    // Calculate the sponsor's cut and the remaining yield once
+    uint256 sponsorYieldCut = (pool.totalYield * SPONSOR_YIELD_CUT_PERCENT) / 100;
+    uint256 remainingYield = pool.totalYield - sponsorYieldCut;
+    
+    // Sponsor Claim
+    if (msg.sender == pool.sponsor) {
+        require(!pool.hasClaimed[msg.sender], "Sponsor has already claimed");
+        claimAmount = pool.sponsorDeposit + sponsorYieldCut;
+        pool.hasClaimed[msg.sender] = true;
+        
         // Send the funds
         (bool success, ) = payable(msg.sender).call{value: claimAmount}("");
         require(success, "ETH transfer failed");
-
-        emit FundsClaimed(_poolId, msg.sender, claimAmount);
     }
+    // Participant Claim
+    else if (pool.userBet[msg.sender] != 0) {
+        require(!pool.hasClaimed[msg.sender], "Participant has already claimed");
+        
+        // Principal is always returned (NO LOSS)
+        claimAmount = TICKET_FEE;
+        
+        // Add yield share for winners
+        if (pool.userBet[msg.sender] == pool.winningOutcomeId) {
+            uint256 winningTickets = pool.outcomeTicketCount[pool.winningOutcomeId];
+            
+            if (winningTickets > 0) {
+                uint256 yieldShare = remainingYield / winningTickets;
+                claimAmount += yieldShare;
+            }
+        }
+        
+        pool.hasClaimed[msg.sender] = true;
+        
+        // Send the funds
+        (bool success, ) = payable(msg.sender).call{value: claimAmount}("");
+        require(success, "ETH transfer failed");
+    } else {
+        revert("Address is neither sponsor nor participant in this pool");
+    }
+    
+    emit FundsClaimed(_poolId, msg.sender, claimAmount);
+}
 
     // --- VIEW FUNCTIONS ---
 
@@ -194,18 +201,18 @@ contract NoLossPredictionPool is Ownable {
         uint256 totalYield
     ) {
         Pool storage pool = pools[_poolId];
-        return (
-            pool.poolId,
-            pool.question,
-            pool.sponsor,
-            pool.sponsorDeposit,
-            pool.participantCount,
-            pool.totalPrincipal,
-            pool.bettingEndTime,
-            pool.isSettled,
-            pool.winningOutcomeId,
-            pool.totalYield
-        );
+    return (
+        pool.poolId,
+        pool.question,
+        pool.sponsor,
+        pool.sponsorDeposit,
+        pool.participantCount,
+        pool.totalPrincipal,
+        pool.bettingEndTime,
+        pool.isSettled,
+        pool.winningOutcomeId,
+        pool.totalYield
+    );
     }
 
     /**
@@ -228,5 +235,12 @@ contract NoLossPredictionPool is Ownable {
     function getOutcomeTicketCount(uint256 _poolId, uint8 _outcomeId) external view returns (uint256) {
         return pools[_poolId].outcomeTicketCount[_outcomeId];
     }
-}
 
+    /**
+     * @dev Get outcome counts for both outcomes (YES=1, NO=2)
+     */
+    function getOutcomeCounts(uint256 _poolId) external view returns (uint256 yesCount, uint256 noCount) {
+        Pool storage pool = pools[_poolId];
+        return (pool.outcomeTicketCount[1], pool.outcomeTicketCount[2]);
+    }
+}

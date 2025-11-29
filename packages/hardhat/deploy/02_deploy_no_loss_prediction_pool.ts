@@ -36,6 +36,16 @@ const deployNoLossPredictionPool: DeployFunction = async function (hre: HardhatR
   console.log("   SPONSOR_YIELD_CUT_PERCENT:", (await noLossPool.SPONSOR_YIELD_CUT_PERCENT()).toString());
   console.log("   Yield Provider:", await noLossPool.yieldProvider());
   console.log("   Next Pool ID:", (await noLossPool.nextPoolId()).toString());
+
+  // Authorize the pool contract to call yield provider functions
+  const mockYieldProviderContract = await hre.ethers.getContract<Contract>("MockYieldProvider", deployer);
+  try {
+    const authorizeTx = await mockYieldProviderContract.authorizePool(deployedAddress);
+    await authorizeTx.wait();
+    console.log("✅ Authorized NoLossPredictionPool to call yield provider functions");
+  } catch (error) {
+    console.log("⚠️  Could not authorize pool (function may not exist in old deployment):", error);
+  }
 };
 
 export default deployNoLossPredictionPool;
