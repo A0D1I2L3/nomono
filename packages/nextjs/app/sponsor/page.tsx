@@ -9,7 +9,7 @@ import { useAccount } from "wagmi";
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { notification } from "~~/utils/scaffold-eth";
 
-// Placeholder for a simple spinner
+// Simple spinner
 const Spinner = ({ size = "sm", className = "" }) => (
   <svg
     className={`animate-spin ${size === "sm" ? "h-5 w-5" : "h-6 w-6"} ${className}`}
@@ -30,7 +30,8 @@ const SponsorPage: React.FC = () => {
   const { address: connectedAddress } = useAccount();
   const router = useRouter();
   const [question, setQuestion] = useState("");
-  const [duration, setDuration] = useState("");
+  const [durationInput, setDurationInput] = useState("");
+  const [durationSecs, setDurationSecs] = useState("");
   const [sponsorDeposit, setSponsorDeposit] = useState("");
 
   const { writeContractAsync: writeNoLossPoolAsync, isMining: isCreatingPool } = useScaffoldWriteContract({
@@ -43,7 +44,7 @@ const SponsorPage: React.FC = () => {
       return;
     }
 
-    const durationValue = duration || "604800"; // 7 days in seconds
+    const finalDuration = durationSecs || "604800"; // default: 7 days
     const depositValue = sponsorDeposit || "0.1";
     const depositAmount = parseFloat(depositValue);
 
@@ -55,12 +56,14 @@ const SponsorPage: React.FC = () => {
     try {
       await writeNoLossPoolAsync({
         functionName: "createPool",
-        args: [question, BigInt(durationValue)],
+        args: [question, BigInt(finalDuration)],
         value: parseEther(depositValue),
       });
+
       notification.success("Pool created successfully!");
       setQuestion("");
-      setDuration("");
+      setDurationInput("");
+      setDurationSecs("");
       setSponsorDeposit("");
       router.push("/");
     } catch (error: any) {
@@ -68,11 +71,12 @@ const SponsorPage: React.FC = () => {
     }
   };
 
-  const returnPercentage = "1.44x";
+  // Fixed 40% → 1.40x
+  const returnPercentage = "1.40x";
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Nomono Logo */}
+      {/* Logo */}
       <div className="fixed top-8 left-8 z-50">
         <Link
           href="/"
@@ -82,9 +86,8 @@ const SponsorPage: React.FC = () => {
         </Link>
       </div>
 
-      {/* Main Content Area */}
       <div className="px-8 py-8 md:px-16 max-w-4xl relative min-h-screen flex flex-col pt-24">
-        {/* Title and Subtitle */}
+        {/* Title */}
         <div className="mb-12 mt-20">
           <h1 className="text-3xl font-bold mb-2 text-black tracking-tight">Set up a bet.</h1>
           <p className="text-base text-gray-500 font-light">
@@ -92,22 +95,63 @@ const SponsorPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Form Fields */}
+        {/* Form */}
         <div className="space-y-8 flex-1">
-          {/* Bet Question */}
+          {/* Question */}
           <div>
             <label className="block mb-2">
               <span className="text-lg font-bold text-black">Bet question:</span>
             </label>
             <input
               type="text"
-              className="w-full px-4 py-4 bg-white border border-gray-300 rounded-xl text-black focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-200 transition-all placeholder:text-gray-300"
+              className="w-full px-4 py-4 bg-white border border-gray-300 rounded-xl text-black
+                         focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-200
+                         transition-all placeholder:text-gray-300"
               value={question}
               onChange={e => setQuestion(e.target.value)}
             />
           </div>
 
-          {/* Stake Amount */}
+          {/* Duration with seconds/minutes/hours/days */}
+          <div>
+            <label className="block mb-2">
+              <span className="text-lg font-bold text-black">Betting duration:</span>
+            </label>
+
+            <div className="flex gap-3">
+              <input
+                type="number"
+                min="1"
+                placeholder="Enter value"
+                className="w-40 px-4 py-4 bg-white border border-gray-300 rounded-xl text-black focus:outline-none"
+                value={durationInput}
+                onChange={e => {
+                  setDurationInput(e.target.value);
+                  setDurationSecs(""); // will be recalculated upon unit selection
+                }}
+              />
+
+              <select
+                className="px-3 py-4 bg-white border border-gray-300 rounded-xl text-black focus:outline-none"
+                onChange={e => {
+                  const n = Number(durationInput);
+                  if (!n || n <= 0) {
+                    setDurationSecs("");
+                    return;
+                  }
+                  const multiplier = Number(e.target.value);
+                  setDurationSecs(String(n * multiplier));
+                }}
+              >
+                <option value="1">Seconds</option>
+                <option value="60">Minutes</option>
+                <option value="3600">Hours</option>
+                <option value="86400">Days</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Sponsor stake */}
           <div>
             <label className="block">
               <span className="text-lg font-bold text-black">Stake Amount:</span>
@@ -117,20 +161,19 @@ const SponsorPage: React.FC = () => {
               <EtherInput
                 defaultValue={sponsorDeposit}
                 onValueChange={({ valueInEth }) => setSponsorDeposit(valueInEth || "")}
-                placeholder=""
               />
             </div>
           </div>
 
-          {/* Return Percentage */}
+          {/* Fixed 40% return */}
           <div>
             <label className="block mb-2">
               <span className="text-lg font-bold text-black">Return percentage:</span>
             </label>
             <input
               type="text"
-              // Adjusted width (w-48) and text style (slate-400, bold, large) to match screenshot
-              className="w-48 px-4 py-4 bg-white border border-gray-300 rounded-xl text-[#94A3B8] font-bold text-2xl cursor-default focus:outline-none"
+              className="w-48 px-4 py-4 bg-white border border-gray-300 rounded-xl text-[#94A3B8]
+                         font-bold text-2xl cursor-default focus:outline-none"
               value={returnPercentage}
               readOnly
             />
@@ -138,9 +181,9 @@ const SponsorPage: React.FC = () => {
         </div>
 
         {/* Footer Buttons */}
-        <div className="fixed bottom-0 left-0 right-0 flex justify-between items-end px-8 pb-8  z-50">
-          {/* Back Button - Bottom Left */}
-          <div className="pointer-events-auto">
+        <div className="fixed bottom-0 left-0 right-0 flex justify-between items-end px-8 pb-8 z-50">
+          {/* Back */}
+          <div>
             <button
               onClick={() => router.back()}
               className="w-14 h-14 bg-[#0B0F19] rounded-xl flex items-center justify-center hover:bg-gray-800 transition-colors"
@@ -149,14 +192,15 @@ const SponsorPage: React.FC = () => {
             </button>
           </div>
 
-          {/* Confirm Button - Bottom Right */}
-          <div className="pointer-events-auto flex flex-col items-end gap-2 pr-4">
+          {/* Confirm */}
+          <div className="flex flex-col items-end gap-2 pr-4">
             <p className="text-sm text-gray-500 font-light">Confirm creation of pool?</p>
             <button
-              // Neon green background, rounded-lg, BLACK text
-              className="px-10 py-4 min-w-[140px] bg-[#05DF72] rounded-lg text-black font-bold text-2xl hover:bg-[#04c764] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-sm"
+              className="px-10 py-4 min-w-[140px] bg-[#05DF72] rounded-lg text-black font-bold text-2xl
+                         hover:bg-[#04c764] transition-colors disabled:opacity-50 disabled:cursor-not-allowed
+                         flex items-center justify-center shadow-sm"
               onClick={handleCreatePool}
-              disabled={isCreatingPool || !connectedAddress || !question}
+              disabled={isCreatingPool || !connectedAddress || !question || !durationSecs}
             >
               {isCreatingPool ? <Spinner size="sm" className="text-black" /> : "YES"}
             </button>
