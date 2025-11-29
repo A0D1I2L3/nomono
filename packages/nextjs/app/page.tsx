@@ -106,44 +106,39 @@ const Home: React.FC = () => {
 
             return (
               <Link key={pool.id} href={linkHref}>
-                <div className="relative cursor-pointer" style={{ width: "674px", height: "330px" }}>
-                  {/* BACK DEPTH BORDER (the black curved shape) */}
+                <div className="relative cursor-pointer w-full h-[330px] md:h-[390px]">
+                  {/* BACK DEPTH BORDER */}
                   <div
                     className="absolute inset-0 rounded-[50px] bg-black"
-                    style={{
-                      transform: "translate(6px, 10px)", // slight shift = depth effect
-                    }}
+                    style={{ transform: "translate(6px, 10px)" }}
                   ></div>
 
-                  {/* FRONT WHITE CARD */}
+                  {/* FRONT CARD */}
                   <div
-                    className="absolute inset-0 bg-white rounded-[50px] px-10 py-8"
+                    className="absolute inset-0 bg-white rounded-[50px] px-8 py-8 border-4 border-black"
                     style={{
-                      border: "4px solid #000000",
-                      borderBottomWidth: "10px", // the thick bottom contour
-                      borderRightWidth: "8px", // slight right depth
+                      borderBottomWidth: "10px",
+                      borderRightWidth: "8px",
                     }}
                   >
                     {/* QUESTION */}
                     <h3
-                      className="text-[26px] font-semibold mb-3"
+                      className="text-[26px] font-semibold mb-3 line-clamp-2"
                       style={{ fontFamily: "'Clash Display Medium', sans-serif" }}
                     >
                       {pool.details.question}
                     </h3>
 
-                    {/* DESCRIPTION */}
+                    {/* AUTO DESCRIPTION (fallback based on pool fields) */}
                     <p
-                      className="text-[18px] text-gray-600 mb-10"
+                      className="text-[18px] text-gray-600 mb-10 line-clamp-3"
                       style={{ fontFamily: "'Clash Display Light', sans-serif" }}
                     >
-                      {pool.details.question.includes("15 people")
-                        ? "Do you think ATLEAST 15 people will bet on this during this demo?"
-                        : "You can set up multiple events for as long as there are sponsors for them!"}
+                      {`Sponsored by ${pool.details.sponsor.slice(0, 6)}...${pool.details.sponsor.slice(-4)} · ${pool.details.participantCount} participants`}
                     </p>
 
-                    {/* BOTTOM ROW */}
-                    <div className="absolute bottom-5 left-10 flex items-center gap-2">
+                    {/* STATUS */}
+                    <div className="absolute bottom-5 left-8 flex items-center gap-2">
                       <div className="w-3 h-3 bg-[#05DF72] rounded-full"></div>
                       <div
                         className="text-[16px] font-semibold"

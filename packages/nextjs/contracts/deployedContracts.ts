@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   10143: {
     MockYieldProvider: {
-      address: "0xaf3c935aff132a1c7df00c3503B993f9Ff4b7879",
+      address: "0x78E70E78634980Cefa3CCEBE28cAc6Ea6E548145",
       abi: [
         {
           inputs: [],
@@ -162,7 +162,7 @@ const deployedContracts = {
             },
             {
               internalType: "uint256",
-              name: "_totalAmount",
+              name: "_requestedAmount",
               type: "uint256",
             },
           ],
@@ -191,10 +191,10 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 52559248,
+      deployedOnBlock: 52569204,
     },
     NoLossPredictionPool: {
-      address: "0x855a27b3ed3989578f7ea4945De0Fdab3b5456c5",
+      address: "0x15141DDaD1B0770342e136a5554Be2C7213a7468",
       abi: [
         {
           inputs: [
@@ -741,7 +741,7 @@ const deployedContracts = {
         renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
         transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
       },
-      deployedOnBlock: 52559280,
+      deployedOnBlock: 52569227,
     },
     YourContract: {
       address: "0xe0AaFCd5e43b05c301ff1C40F3991Ea62f85954E",
