@@ -21,3 +21,8 @@ node_modules
 
 # cli
 dist
+
+# environment variables (NEVER commit these!)
+.env
+.env.local
+.env.*.local

@@ -1,0 +1,244 @@
+{
+  "address": "0x0d32eAcd7b4595F14C3180B0beb1a8aF4AF583fF",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "poolAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "totalReturn",
+          "type": "uint256"
+        }
+      ],
+      "name": "PrincipalAndYieldReturned",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "poolAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "PrincipalDeposited",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "poolAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "yieldAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "YieldSet",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_poolAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "depositPrincipal",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "poolYields",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_poolAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "returnPrincipalAndYield",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_poolAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_yieldAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "setPoolYield",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xb05dbd0a2d17e183f99cd1b6aef089d3edc44f79fc3af7118c62740309114f74",
+  "receipt": {
+    "to": null,
+    "from": "0x9416CF0496Bb71D47EE4865F11601EE3413B7EeE",
+    "contractAddress": "0x0d32eAcd7b4595F14C3180B0beb1a8aF4AF583fF",
+    "transactionIndex": 4,
+    "gasUsed": "316990",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xaefca151a6cdeca2156fccb60c5702084e65d7f7fd188b29241f3d6a79012644",
+    "transactionHash": "0xb05dbd0a2d17e183f99cd1b6aef089d3edc44f79fc3af7118c62740309114f74",
+    "logs": [],
+    "blockNumber": 52534956,
+    "cumulativeGasUsed": "2308024",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "d7973799982e6c4edf6f21ed9026f554",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"poolAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalReturn\",\"type\":\"uint256\"}],\"name\":\"PrincipalAndYieldReturned\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"poolAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"PrincipalDeposited\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"poolAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"yieldAmount\",\"type\":\"uint256\"}],\"name\":\"YieldSet\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_poolAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"depositPrincipal\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"poolYields\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_poolAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_totalAmount\",\"type\":\"uint256\"}],\"name\":\"returnPrincipalAndYield\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_poolAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_yieldAmount\",\"type\":\"uint256\"}],\"name\":\"setPoolYield\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Simulates a DeFi protocol (like Aave or Lido) where the principal is deposited to earn yield. For demo purposes, the yield amount is manually set by the deployer or the contract owner when settling the pool.\",\"kind\":\"dev\",\"methods\":{\"depositPrincipal(address,uint256)\":{\"details\":\"Simulates the action of sending the pool's principal to a DeFi protocol.\",\"params\":{\"_amount\":\"The principal amount (Sponsor + Participants deposits).\",\"_poolAddress\":\"The address of the betting pool contract.\"}},\"returnPrincipalAndYield(address,uint256)\":{\"details\":\"Returns the total funds (Principal + Yield) back to the Pool for distribution.\",\"params\":{\"_poolAddress\":\"The address of the betting pool contract.\",\"_totalAmount\":\"The total principal + yield to be returned.\"}},\"setPoolYield(address,uint256)\":{\"details\":\"Sets the simulated yield generated by the principal (called by the owner).\"}},\"title\":\"MockYieldProvider\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/MockYieldProvider.sol\":\"MockYieldProvider\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/MockYieldProvider.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.20;\\n\\n/**\\n * @title MockYieldProvider\\n * @dev Simulates a DeFi protocol (like Aave or Lido) where the principal is deposited\\n * to earn yield. For demo purposes, the yield amount is manually set by the deployer\\n * or the contract owner when settling the pool.\\n */\\ncontract MockYieldProvider {\\n    address public owner;\\n    mapping(address => uint256) public poolYields;\\n\\n    event PrincipalDeposited(address indexed poolAddress, uint256 amount);\\n    event YieldSet(address indexed poolAddress, uint256 yieldAmount);\\n    event PrincipalAndYieldReturned(address indexed poolAddress, uint256 totalReturn);\\n\\n    constructor() {\\n        owner = msg.sender;\\n    }\\n\\n    modifier onlyOwner() {\\n        require(msg.sender == owner, \\\"Only owner can call\\\");\\n        _;\\n    }\\n\\n    /**\\n     * @dev Simulates the action of sending the pool's principal to a DeFi protocol.\\n     * @param _poolAddress The address of the betting pool contract.\\n     * @param _amount The principal amount (Sponsor + Participants deposits).\\n     */\\n    function depositPrincipal(address _poolAddress, uint256 _amount) public payable {\\n        require(msg.value == _amount, \\\"Deposit amount mismatch\\\");\\n        emit PrincipalDeposited(_poolAddress, _amount);\\n        // Funds are held in this contract's balance\\n    }\\n\\n    /**\\n     * @dev Sets the simulated yield generated by the principal (called by the owner).\\n     */\\n    function setPoolYield(address _poolAddress, uint256 _yieldAmount) public onlyOwner {\\n        poolYields[_poolAddress] = _yieldAmount;\\n        emit YieldSet(_poolAddress, _yieldAmount);\\n    }\\n\\n    /**\\n     * @dev Returns the total funds (Principal + Yield) back to the Pool for distribution.\\n     * @param _poolAddress The address of the betting pool contract.\\n     * @param _totalAmount The total principal + yield to be returned.\\n     */\\n    function returnPrincipalAndYield(address _poolAddress, uint256 _totalAmount) public onlyOwner {\\n        // Conceptually transfers funds from the DeFi protocol back to the pool\\n        (bool success, ) = payable(_poolAddress).call{value: _totalAmount}(\\\"\\\");\\n        require(success, \\\"Transfer failed\\\");\\n\\n        // Clear the yield record\\n        delete poolYields[_poolAddress];\\n\\n        emit PrincipalAndYieldReturned(_poolAddress, _totalAmount);\\n    }\\n}\\n\\n\",\"keccak256\":\"0xa2a54db5f66bbfdb9425a74c34b42602bf0b137b026217011ef9b88a0942fde7\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50600080546001600160a01b03191633179055610431806100326000396000f3fe60806040526004361061004a5760003560e01c806314e7d02f1461004f57806315ebf74a1461007157806324f2c463146100915780638da5cb5b146100a4578063d3bf3b6a146100e1575b600080fd5b34801561005b57600080fd5b5061006f61006a3660046103af565b61011c565b005b34801561007d57600080fd5b5061006f61008c3660046103af565b6101ca565b61006f61009f3660046103af565b610309565b3480156100b057600080fd5b506000546100c4906001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b3480156100ed57600080fd5b5061010e6100fc3660046103d9565b60016020526000908152604090205481565b6040519081526020016100d8565b6000546001600160a01b031633146101715760405162461bcd60e51b815260206004820152601360248201527213db9b1e481bdddb995c8818d85b8818d85b1b606a1b60448201526064015b60405180910390fd5b6001600160a01b03821660008181526001602052604090819020839055517fb3847545cfbda9546c0b8d2ee7398cdbced26db8b2429085b544b114045b560e906101be9084815260200190565b60405180910390a25050565b6000546001600160a01b0316331461021a5760405162461bcd60e51b815260206004820152601360248201527213db9b1e481bdddb995c8818d85b8818d85b1b606a1b6044820152606401610168565b6000826001600160a01b03168260405160006040518083038185875af1925050503d8060008114610267576040519150601f19603f3d011682016040523d82523d6000602084013e61026c565b606091505b50509050806102af5760405162461bcd60e51b815260206004820152600f60248201526e151c985b9cd9995c8819985a5b1959608a1b6044820152606401610168565b6001600160a01b03831660008181526001602052604080822091909155517fe30f8d8307e55749fb18b864590a2f3355e3eaee82aa07814f131cea125c3377906102fc9085815260200190565b60405180910390a2505050565b8034146103585760405162461bcd60e51b815260206004820152601760248201527f4465706f73697420616d6f756e74206d69736d617463680000000000000000006044820152606401610168565b816001600160a01b03167f2d61cf17bab18b04495576cf3d5490afd6c0c573d79b7ce84a50fb523abb3daf826040516101be91815260200190565b80356001600160a01b03811681146103aa57600080fd5b919050565b600080604083850312156103c257600080fd5b6103cb83610393565b946020939093013593505050565b6000602082840312156103eb57600080fd5b6103f482610393565b939250505056fea2646970667358221220f8db2e629abc3b3e8cbd076f93c9b937f070efbaaf27e6ceccb70c71f81a198064736f6c63430008140033",
+  "deployedBytecode": "0x60806040526004361061004a5760003560e01c806314e7d02f1461004f57806315ebf74a1461007157806324f2c463146100915780638da5cb5b146100a4578063d3bf3b6a146100e1575b600080fd5b34801561005b57600080fd5b5061006f61006a3660046103af565b61011c565b005b34801561007d57600080fd5b5061006f61008c3660046103af565b6101ca565b61006f61009f3660046103af565b610309565b3480156100b057600080fd5b506000546100c4906001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b3480156100ed57600080fd5b5061010e6100fc3660046103d9565b60016020526000908152604090205481565b6040519081526020016100d8565b6000546001600160a01b031633146101715760405162461bcd60e51b815260206004820152601360248201527213db9b1e481bdddb995c8818d85b8818d85b1b606a1b60448201526064015b60405180910390fd5b6001600160a01b03821660008181526001602052604090819020839055517fb3847545cfbda9546c0b8d2ee7398cdbced26db8b2429085b544b114045b560e906101be9084815260200190565b60405180910390a25050565b6000546001600160a01b0316331461021a5760405162461bcd60e51b815260206004820152601360248201527213db9b1e481bdddb995c8818d85b8818d85b1b606a1b6044820152606401610168565b6000826001600160a01b03168260405160006040518083038185875af1925050503d8060008114610267576040519150601f19603f3d011682016040523d82523d6000602084013e61026c565b606091505b50509050806102af5760405162461bcd60e51b815260206004820152600f60248201526e151c985b9cd9995c8819985a5b1959608a1b6044820152606401610168565b6001600160a01b03831660008181526001602052604080822091909155517fe30f8d8307e55749fb18b864590a2f3355e3eaee82aa07814f131cea125c3377906102fc9085815260200190565b60405180910390a2505050565b8034146103585760405162461bcd60e51b815260206004820152601760248201527f4465706f73697420616d6f756e74206d69736d617463680000000000000000006044820152606401610168565b816001600160a01b03167f2d61cf17bab18b04495576cf3d5490afd6c0c573d79b7ce84a50fb523abb3daf826040516101be91815260200190565b80356001600160a01b03811681146103aa57600080fd5b919050565b600080604083850312156103c257600080fd5b6103cb83610393565b946020939093013593505050565b6000602082840312156103eb57600080fd5b6103f482610393565b939250505056fea2646970667358221220f8db2e629abc3b3e8cbd076f93c9b937f070efbaaf27e6ceccb70c71f81a198064736f6c63430008140033",
+  "devdoc": {
+    "details": "Simulates a DeFi protocol (like Aave or Lido) where the principal is deposited to earn yield. For demo purposes, the yield amount is manually set by the deployer or the contract owner when settling the pool.",
+    "kind": "dev",
+    "methods": {
+      "depositPrincipal(address,uint256)": {
+        "details": "Simulates the action of sending the pool's principal to a DeFi protocol.",
+        "params": {
+          "_amount": "The principal amount (Sponsor + Participants deposits).",
+          "_poolAddress": "The address of the betting pool contract."
+        }
+      },
+      "returnPrincipalAndYield(address,uint256)": {
+        "details": "Returns the total funds (Principal + Yield) back to the Pool for distribution.",
+        "params": {
+          "_poolAddress": "The address of the betting pool contract.",
+          "_totalAmount": "The total principal + yield to be returned."
+        }
+      },
+      "setPoolYield(address,uint256)": {
+        "details": "Sets the simulated yield generated by the principal (called by the owner)."
+      }
+    },
+    "title": "MockYieldProvider",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 182,
+        "contract": "contracts/MockYieldProvider.sol:MockYieldProvider",
+        "label": "owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 186,
+        "contract": "contracts/MockYieldProvider.sol:MockYieldProvider",
+        "label": "poolYields",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_uint256)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

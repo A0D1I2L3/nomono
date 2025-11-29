@@ -19,6 +19,13 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     existing PK which will fill DEPLOYER_PRIVATE_KEY_ENCRYPTED in the .env file (then used on hardhat.config.ts)
     You can run the `yarn account` command to check your balance in every network.
   */
+
+  // Skip deployment on Monad testnet - we only want to deploy NoLossPredictionPool contracts
+  if (hre.network.name === "monad_testnet") {
+    console.log("⏭️  Skipping YourContract deployment on Monad testnet");
+    return;
+  }
+
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
